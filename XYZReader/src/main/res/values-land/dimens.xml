@@ -1,0 +1,5 @@
+<resources>
+    <!-- detail -->
+    <dimen name="article_image_height">80dp</dimen>
+
+</resources>

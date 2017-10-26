@@ -5,8 +5,12 @@ import android.util.AttributeSet;
 
 import com.android.volley.toolbox.NetworkImageView;
 
+import java.util.Random;
+
 public class DynamicHeightNetworkImageView extends NetworkImageView {
     private float mAspectRatio = 1.5f;
+    private float mDiff = 0.3f;
+    Random rand = new Random();
 
     public DynamicHeightNetworkImageView(Context context) {
         super(context);
@@ -29,6 +33,8 @@ public class DynamicHeightNetworkImageView extends NetworkImageView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int measuredWidth = getMeasuredWidth();
-        setMeasuredDimension(measuredWidth, (int) (measuredWidth / mAspectRatio));
+
+        mDiff = rand.nextInt(3) != 1 ? mDiff : 0.0f ;
+        setMeasuredDimension(measuredWidth, (int) (measuredWidth / (mAspectRatio + mDiff)));
     }
 }

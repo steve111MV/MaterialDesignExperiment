@@ -12,6 +12,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.format.DateUtils;
@@ -119,11 +120,12 @@ public class ArticleDetailFragment2 extends Fragment implements
         mDrawInsetsFrameLayout.setOnInsetsCallback(new DrawInsetsFrameLayout.OnInsetsCallback() {
             @Override
             public void onInsetsChanged(Rect insets) {
-                mTopInset = insets.top;
+               // mTopInset = insets.top;
             }
         });
 
         mScrollView = (ObservableScrollView) mRootView.findViewById(R.id.scrollview);
+
         mScrollView.setCallbacks(new ObservableScrollView.Callbacks() {
             @Override
             public void onScrollChanged() {
@@ -210,7 +212,8 @@ public class ArticleDetailFragment2 extends Fragment implements
         if (mCursor != null) {
             mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
-            mRootView.animate().alpha(1);
+            ViewCompat.animate(mRootView).alpha(1).setDuration(300);
+
             titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             Date publishedDate = parsePublishedDate();
             if (!publishedDate.before(START_OF_EPOCH.getTime())) {
@@ -252,12 +255,14 @@ public class ArticleDetailFragment2 extends Fragment implements
 
                         }
                     });
-        } else {
-            mRootView.setVisibility(View.GONE);
-            titleView.setText("N/A");
-            bylineView.setText("N/A" );
-            bodyView.setText("N/A");
-        }
+        } /*else {
+            if(bodyView!=null && !bodyView.getText().toString().isEmpty()) {
+                mRootView.setVisibility(View.GONE);
+                titleView.setText("N/A");
+                bylineView.setText("N/A");
+                bodyView.setText("N/A");
+            }
+        }*/
     }
 
     @Override

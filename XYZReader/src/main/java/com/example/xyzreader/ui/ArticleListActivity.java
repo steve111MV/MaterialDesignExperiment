@@ -58,12 +58,14 @@ public class ArticleListActivity extends ActionBarActivity implements
         setContentView(R.layout.activity_article_list);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        //final View toolbarContainerView = findViewById(R.id.toolbar_container);
-
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        int columnCount = getResources().getInteger(R.integer.list_column_count);
+        StaggeredGridLayoutManager sglm =
+                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(sglm);
+
         getLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null) {
@@ -114,10 +116,6 @@ public class ArticleListActivity extends ActionBarActivity implements
         Adapter adapter = new Adapter(cursor);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
-        int columnCount = getResources().getInteger(R.integer.list_column_count);
-        StaggeredGridLayoutManager sglm =
-                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(sglm);
 
         assert mSwipeRefreshLayout != null;
         mSwipeRefreshLayout.setRefreshing(false);
@@ -145,13 +143,6 @@ public class ArticleListActivity extends ActionBarActivity implements
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = getLayoutInflater().inflate(R.layout.list_item_article, parent, false);
             final ViewHolder vh = new ViewHolder(view);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
-                }
-            });
             return vh;
         }
 
@@ -173,7 +164,7 @@ public class ArticleListActivity extends ActionBarActivity implements
             Date publishedDate = parsePublishedDate();
             if (!publishedDate.before(START_OF_EPOCH.getTime())) {
 
-                holder.subtitleView.setText(" by "
+                holder.subtitleView.setText(getString(R.string.article_by)+" "
                                 + mCursor.getString(ArticleLoader.Query.AUTHOR));
 
                 holder.publishDate.setText(DateUtils.getRelativeTimeSpanString(
@@ -181,7 +172,7 @@ public class ArticleListActivity extends ActionBarActivity implements
                         System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
                         DateUtils.FORMAT_ABBREV_ALL).toString());
             } else {
-                holder.subtitleView.setText(" by "
+                holder.subtitleView.setText(getString(R.string.article_by)+" "
                         + mCursor.getString(ArticleLoader.Query.AUTHOR));
                 holder.publishDate.setText(
                         outputFormat.format(publishedDate));
@@ -198,7 +189,7 @@ public class ArticleListActivity extends ActionBarActivity implements
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public DynamicHeightNetworkImageView thumbnailView;
         public TextView titleView;
         public TextView subtitleView;
@@ -210,6 +201,14 @@ public class ArticleListActivity extends ActionBarActivity implements
             titleView = (TextView) view.findViewById(R.id.article_title);
             subtitleView = (TextView) view.findViewById(R.id.article_subtitle);
             publishDate = (TextView) view.findViewById(R.id.article_date);
+
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            view.getContext().startActivity(new Intent(Intent.ACTION_VIEW,
+                    ItemsContract.Items.buildItemUri(getItemId())));
         }
     }
 }

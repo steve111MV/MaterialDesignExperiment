@@ -6,7 +6,9 @@ buildscript {
         //classpath 'com.android.tools.build:gradle:2.2.0'
     }
 }
+
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
     mavenCentral()
@@ -16,9 +18,11 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
 
+
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 26
+        multiDexEnabled true
     }
 }
 
@@ -34,6 +38,11 @@ dependencies {
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
+    compile 'com.android.support:multidex:1.0.1'
+
     compile files('libs/volley.jar')
 }

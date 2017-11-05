@@ -9,5 +9,9 @@
 
     <string name="up">Up</string>
     <string name="article_by">by</string>
+    <string name="shared_element_photo">photo</string>
+    <string name="internet_off">No internet connexion, can\'t load details</string>
+    <string name="internet_off_data">No internet connexion, can\'t load details</string>
+    <string name="retry_fab">Retry !</string>
 
 </resources>

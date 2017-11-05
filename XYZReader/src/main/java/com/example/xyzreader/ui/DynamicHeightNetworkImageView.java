@@ -2,12 +2,13 @@ package com.example.xyzreader.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 
 import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.Random;
 
-public class DynamicHeightNetworkImageView extends NetworkImageView {
+public class DynamicHeightNetworkImageView extends ImageView {
     private float mAspectRatio = 1.5f;
     private float mDiff = 0.3f;
     Random rand = new Random();

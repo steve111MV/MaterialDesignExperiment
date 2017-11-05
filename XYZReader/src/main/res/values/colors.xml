@@ -17,10 +17,11 @@
 
 <resources>
 
-    <color name="colorTextPrimary">#414141</color>
-    <color name="colorTextPrimaryDark">#212121</color>
+    <color name="colorPrimary">#414141</color>
+    <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#f60057</color>
 
+    <color name="default_pallete_color">#283848</color>
     <color name="theme_primary">#04561A</color>
     <color name="theme_primary_dark">#04561A</color>
 

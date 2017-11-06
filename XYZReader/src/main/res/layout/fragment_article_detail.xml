@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/detail_photo_height"
         android:fitsSystemWindows="true"
+        app:elevation="@dimen/cardview_default_elevation"
         app:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -45,7 +46,6 @@
                 android:layout_height="?actionBarSize"
                 android:gravity="top"
                 app:layout_collapseMode="pin"
-                android:elevation="2dp"
                 android:layout_marginTop="@dimen/list_toolbar_top_margin"
                 android:layout_marginLeft="@dimen/list_toolbar_side_margin"
                 android:layout_marginRight="@dimen/list_toolbar_side_margin"

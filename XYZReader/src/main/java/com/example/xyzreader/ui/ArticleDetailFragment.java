@@ -150,6 +150,7 @@ public class ArticleDetailFragment extends Fragment implements
         mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
         ButterKnife.bind(this, mRootView);
 
+
         // Display Home Up back-arrow
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
 

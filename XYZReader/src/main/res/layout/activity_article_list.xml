@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="@dimen/cardview_default_elevation"
         >
 
         <android.support.v7.widget.Toolbar
@@ -17,7 +18,6 @@
             app:theme="@style/AppTheme.PopupOverlay"
             android:layout_marginLeft="@dimen/list_toolbar_side_margin"
             android:layout_marginRight="@dimen/list_toolbar_side_margin"
-            android:elevation="2dp"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize">
 

@@ -107,6 +107,7 @@ public class ArticleDetailFragment extends Fragment implements
      * fragment (e.g. upon screen orientation changes).
      */
     public ArticleDetailFragment() {
+
     }
 
     public static ArticleDetailFragment newInstance(long itemId) {
@@ -145,18 +146,13 @@ public class ArticleDetailFragment extends Fragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
         mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
         ButterKnife.bind(this, mRootView);
 
-
         // Display Home Up back-arrow
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
-
-        ((AppCompatActivity)getActivity())
-                .getSupportActionBar()
-                .setDisplayHomeAsUpEnabled(true);
 
         bindViews();
         return mRootView;
@@ -167,11 +163,11 @@ public class ArticleDetailFragment extends Fragment implements
         super.onViewCreated(view, savedInstanceState);
 
         if(mCursor != null)
-        if(Tools.isInternetAvailaible(getActivity())) {
+            if(Tools.isInternetAvailaible(getActivity())) {
 
-        } else {
-            Snackbar.make(mRootView, R.string.internet_off , Snackbar.LENGTH_SHORT).show();
-        }
+            } else {
+                Snackbar.make(mRootView, R.string.internet_off , Snackbar.LENGTH_SHORT).show();
+            }
     }
 
     private Date parsePublishedDate() {
@@ -215,7 +211,7 @@ public class ArticleDetailFragment extends Fragment implements
                 // If date is before 1902, just show the string
                 bylineView.setText(Html.fromHtml(
                         outputFormat.format(publishedDate) + " by <font color='#ffffff'>"
-                        + mCursor.getString(ArticleLoader.Query.AUTHOR)
+                                + mCursor.getString(ArticleLoader.Query.AUTHOR)
                                 + "</font>"));
 
             }
@@ -236,7 +232,7 @@ public class ArticleDetailFragment extends Fragment implements
                         } catch (Exception ex){
                             Snackbar.make(mRootView, R.string.retry_fab,Snackbar.LENGTH_SHORT).show();
                         }
-                    }
+                }
             });
 
                     /*
@@ -327,21 +323,5 @@ public class ArticleDetailFragment extends Fragment implements
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         mCursor = null;
         bindViews();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-            case android.R.id.home:
-                getFragmentManager().popBackStack();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

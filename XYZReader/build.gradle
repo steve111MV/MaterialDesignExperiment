@@ -8,7 +8,7 @@ buildscript {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
     mavenCentral()
@@ -38,8 +38,8 @@ dependencies {
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
     compile 'com.android.support:multidex:1.0.1'
